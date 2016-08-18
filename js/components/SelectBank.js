@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import API from '../API';
+import UserStore from '../stores/UserStore';
 
 export default class SelectBank extends Component {
 	constructor(props) {
@@ -8,10 +9,18 @@ export default class SelectBank extends Component {
 
 		this.openSandbox = this.openSandbox.bind(this);
 		this.getData = this.getData.bind(this);
+		this.receiveData = this.receiveData.bind(this);
 	}
 
-	openSandbox(msg) {
-		console.log('msg', msg);
+	componentDidMount() {
+		UserStore.on("receiveData", this.receiveData);
+	}
+
+	receiveData() {
+		console.log('receiveData', UserStore.receiveData());
+	}
+
+	openSandbox() {
 		const sandboxHandler = Plaid.create({
 			  env: 'tartan',
 			  clientName: 'Client Name',

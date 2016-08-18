@@ -6,7 +6,7 @@ let API = {
 	getData(bankData) {
 		post('/users', bankData)
 			.then(res => {
-				console.log('res', res);
+				UserActions.dataReceived(res);
 			})
 			.catch(err => {
 				console.log('err', err);
