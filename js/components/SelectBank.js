@@ -10,7 +10,8 @@ export default class SelectBank extends Component {
 		this.getData = this.getData.bind(this);
 	}
 
-	openSandbox() {
+	openSandbox(msg) {
+		console.log('msg', msg);
 		const sandboxHandler = Plaid.create({
 			  env: 'tartan',
 			  clientName: 'Client Name',

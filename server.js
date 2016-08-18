@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
+app.use('/users', require('./routes/users'));
+
 app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, './public/index.html'));
 });

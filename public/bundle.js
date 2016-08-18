@@ -22039,9 +22039,10 @@
 	
 		_createClass(SelectBank, [{
 			key: 'openSandbox',
-			value: function openSandbox() {
+			value: function openSandbox(msg) {
 				var _this2 = this;
 	
+				console.log('msg', msg);
 				var sandboxHandler = Plaid.create({
 					env: 'tartan',
 					clientName: 'Client Name',
@@ -22128,7 +22129,7 @@
 	
 	var API = {
 		getData: function getData(bankData) {
-			(0, _jquery.post)('https://tartan.plaid.com/connect/', bankData).then(function (res) {
+			(0, _jquery.post)('/users', bankData).then(function (res) {
 				console.log('res', res);
 			}).catch(function (err) {
 				console.log('err', err);
