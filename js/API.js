@@ -11,7 +11,13 @@ let API = {
 			.catch(err => {
 				console.log('err', err);
 			})
-	}
+
+
+	},
+
+
+
+
 }
 
 export default API;
