@@ -64,14 +64,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_reactDom2.default.render(_react2.default.createElement(_SelectBank2.default, null), document.getElementById('react'));
-	
-	// const Modal = React.createclass({
-	// 	render() {
-	// 		return (
-	// 			{modalInstance}
-	// 		)
-	// 	}
-	// })
 
 /***/ },
 /* 1 */
@@ -22037,53 +22029,54 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SelectBank).call(this, props));
 	
 			_this.openSandbox = _this.openSandbox.bind(_this);
-			_this.onSuccess = _this.onSuccess.bind(_this);
-	
-			var sandboxHandler = Plaid.create({
-				env: 'tartan',
-				clientName: 'Client Name',
-				key: 'test_key',
-				product: 'connect',
-				onSuccess: function onSuccess(public_token, metadata) {
-					console.log('public_token', public_token);
-					console.log('metadata', metadata);
-					SelectBank.onSuccess();
-				}
-			});
-	
-			_this.state = {
-				sandboxHandler: sandboxHandler
-			};
+			_this.getData = _this.getData.bind(_this);
 			return _this;
 		}
 	
 		_createClass(SelectBank, [{
 			key: 'openSandbox',
 			value: function openSandbox() {
-				this.state.sandboxHandler.open();
+				var _this2 = this;
+	
+				var sandboxHandler = Plaid.create({
+					env: 'tartan',
+					clientName: 'Client Name',
+					key: 'test_key',
+					product: 'connect',
+					onSuccess: function onSuccess(public_token, metadata) {
+						_this2.getData(metadata.institution.type);
+					}
+				});
+				sandboxHandler.open();
 			}
 		}, {
-			key: 'onSuccess',
-			value: function onSuccess() {
-				console.log('here');
+			key: 'getData',
+			value: function getData(data) {
+				var infoObj = {
+					client_id: 'test_id',
+					secret: 'test_secret',
+					username: 'plaid_test',
+					password: 'plaid_good',
+					type: data
+				};
 			}
 		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'container' },
-					_react2.default.createElement(
-						'h1',
-						null,
-						'hello form SelectBank'
-					),
+					{ className: 'container text-md-center', style: styles.container },
 					_react2.default.createElement(
 						'button',
 						{
-							className: 'btn btn-primary',
-							onClick: this.openSandbox },
-						'Select Bank'
+							className: 'btn btn-success-outline',
+							onClick: this.openSandbox,
+							style: styles.button },
+						_react2.default.createElement(
+							'h1',
+							null,
+							'Select Bank'
+						)
 					)
 				);
 			}
@@ -22093,6 +22086,18 @@
 	}(_react.Component);
 	
 	exports.default = SelectBank;
+	
+	
+	var styles = {
+		container: {
+			paddingTop: 300
+		},
+		button: {
+			width: 500,
+			height: 100,
+			borderWidth: 3
+		}
+	};
 
 /***/ }
 /******/ ]);
