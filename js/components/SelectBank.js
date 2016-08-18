@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
 
 import API from '../API';
 import UserStore from '../stores/UserStore';
@@ -17,7 +18,8 @@ export default class SelectBank extends Component {
 	}
 
 	receiveData() {
-		console.log('receiveData', UserStore.receiveData());
+		// console.log('receiveData', UserStore.receiveData());
+		browserHistory.push('/details');
 	}
 
 	openSandbox() {
