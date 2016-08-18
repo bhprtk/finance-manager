@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import API from '../API';
+
 export default class SelectBank extends Component {
 	constructor(props) {
 		super(props);
@@ -29,6 +31,8 @@ export default class SelectBank extends Component {
 			password: 'plaid_good',
 			type: data
 		}
+
+		API.getData(infoObj);
 	}
 
 	render() {
