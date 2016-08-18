@@ -27893,18 +27893,23 @@
 	
 			_this.openSandbox = _this.openSandbox.bind(_this);
 			_this.getData = _this.getData.bind(_this);
-			_this.receiveData = _this.receiveData.bind(_this);
+			_this.navigateToDetails = _this.navigateToDetails.bind(_this);
 			return _this;
 		}
 	
 		_createClass(SelectBank, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				_UserStore2.default.on("receiveData", this.receiveData);
+				_UserStore2.default.on("receiveData", this.navigateToDetails);
 			}
 		}, {
-			key: 'receiveData',
-			value: function receiveData() {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				_UserStore2.default.removeListener("receiveData", this.navigateToDetails);
+			}
+		}, {
+			key: 'navigateToDetails',
+			value: function navigateToDetails() {
 				// console.log('receiveData', UserStore.receiveData());
 				_reactRouter.browserHistory.push('/details');
 			}
@@ -38876,6 +38881,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _UserStore = __webpack_require__(/*! ../stores/UserStore */ 247);
+	
+	var _UserStore2 = _interopRequireDefault(_UserStore);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38887,19 +38896,28 @@
 	var Details = function (_Component) {
 		_inherits(Details, _Component);
 	
-		function Details() {
+		function Details(props) {
 			_classCallCheck(this, Details);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Details).apply(this, arguments));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Details).call(this, props));
 		}
 	
 		_createClass(Details, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log('receiveData', _UserStore2.default.receiveData());
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					'h1',
-					null,
-					'Details'
+					'div',
+					{ className: 'container' },
+					_react2.default.createElement(
+						'h1',
+						null,
+						'Details'
+					)
 				);
 			}
 		}]);

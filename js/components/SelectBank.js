@@ -10,15 +10,18 @@ export default class SelectBank extends Component {
 
 		this.openSandbox = this.openSandbox.bind(this);
 		this.getData = this.getData.bind(this);
-		this.receiveData = this.receiveData.bind(this);
+		this.navigateToDetails = this.navigateToDetails.bind(this);
 	}
 
 	componentDidMount() {
-		UserStore.on("receiveData", this.receiveData);
+		UserStore.on("receiveData", this.navigateToDetails);
 	}
 
-	receiveData() {
-		// console.log('receiveData', UserStore.receiveData());
+	componentWillUnmount() {
+		UserStore.removeListener("receiveData", this.navigateToDetails)
+	}
+
+	navigateToDetails() {
 		browserHistory.push('/details');
 	}
 
