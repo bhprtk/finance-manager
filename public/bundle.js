@@ -38929,7 +38929,6 @@
 	  }, {
 	    key: 'receiveTransactions',
 	    value: function receiveTransactions(accountId) {
-	
 	      return tempData.transactions.filter(function (transaction) {
 	        return transaction._account === accountId;
 	      });
@@ -39382,6 +39381,9 @@
 	        "access_token": "test_wells"
 	      };
 	
+	      tempData.transactions.forEach(function (transaction) {
+	        transaction.amount = Math.abs(transaction.amount);
+	      });
 	      return tempData;
 	    }
 	  }]);

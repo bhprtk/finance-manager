@@ -29,7 +29,6 @@ class UserStore extends EventEmitter {
 	}
 
 	receiveTransactions(accountId) {
-
 		return tempData.transactions.filter(transaction => {
 			return (transaction._account === accountId);
 		})
@@ -555,6 +554,9 @@ class UserStore extends EventEmitter {
   "access_token": "test_wells"
 }
 
+tempData.transactions.forEach(transaction => {
+	transaction.amount = Math.abs(transaction.amount);
+})
 return tempData;
 	}
 
