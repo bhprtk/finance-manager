@@ -23,24 +23,30 @@ class UserStore extends EventEmitter {
 	}
 
 	receiveAccount(accountId) {
-		return tempData.accounts.filter(account => {
+		return _data.accounts.filter(account => {
 			return (account._id === accountId);
 		})
-	}
-
-	receiveTransactions(accountId) {
-		return tempData.transactions.filter(transaction => {
-			return (transaction._account === accountId);
-		})
-		// return _data.transactions.filter(transaction => {
-		// 	return (transaction._account === accountId);
+		// return tempData.accounts.filter(account => {
+		// 	return (account._id === accountId);
 		// })
 	}
 
-	receiveData() {
-		// _data = JSON.parse(_data);
+	receiveTransactions(accountId) {
+		// return tempData.transactions.filter(transaction => {
+		// 	return (transaction._account === accountId);
+		// })
+		_data.transactions.forEach(transaction => {
+			transaction.amount = Math.abs(transaction.amount);
+		})
+		return _data.transactions.filter(transaction => {
+			return (transaction._account === accountId);
+		})
+	}
 
-		// return _data;
+	receiveData() {
+		_data = JSON.parse(_data);
+
+		return _data;
 		// console.log('_data', _data);
 		tempData = {
   "accounts": [
@@ -554,10 +560,13 @@ class UserStore extends EventEmitter {
   "access_token": "test_wells"
 }
 
-tempData.transactions.forEach(transaction => {
+_data.transactions.forEach(transaction => {
 	transaction.amount = Math.abs(transaction.amount);
 })
-return tempData;
+// tempData.transactions.forEach(transaction => {
+// 	transaction.amount = Math.abs(transaction.amount);
+// })
+return _data;
 	}
 
 }

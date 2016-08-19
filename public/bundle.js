@@ -92,7 +92,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".navbarbar {\n\tcolor: red;\n}\n\n.titleStyle {\n\tfont-size: 40px;\n\tfont-family: 'Lato', sans-serif;\n\t/*font-family: `'Droid Sans', sans-serif`;*/\n\t/*font-family: `'Droid Serif', serif`;*/\n}\n", ""]);
+	exports.push([module.id, ".navbarbar {\n\tcolor: red;\n}\n\n.titleStyle {\n\tfont-size: 40px;\n\tfont-family: 'Lato', sans-serif;\n\t/*font-family: `'Droid Sans', sans-serif`;*/\n\t/*font-family: `'Droid Serif', serif`;*/\n\tcolor: #696969;\n}\n", ""]);
 	
 	// exports
 
@@ -38922,26 +38922,32 @@
 	  _createClass(UserStore, [{
 	    key: 'receiveAccount',
 	    value: function receiveAccount(accountId) {
-	      return tempData.accounts.filter(function (account) {
+	      return _data.accounts.filter(function (account) {
 	        return account._id === accountId;
 	      });
+	      // return tempData.accounts.filter(account => {
+	      // 	return (account._id === accountId);
+	      // })
 	    }
 	  }, {
 	    key: 'receiveTransactions',
 	    value: function receiveTransactions(accountId) {
-	      return tempData.transactions.filter(function (transaction) {
-	        return transaction._account === accountId;
-	      });
-	      // return _data.transactions.filter(transaction => {
+	      // return tempData.transactions.filter(transaction => {
 	      // 	return (transaction._account === accountId);
 	      // })
+	      _data.transactions.forEach(function (transaction) {
+	        transaction.amount = Math.abs(transaction.amount);
+	      });
+	      return _data.transactions.filter(function (transaction) {
+	        return transaction._account === accountId;
+	      });
 	    }
 	  }, {
 	    key: 'receiveData',
 	    value: function receiveData() {
-	      // _data = JSON.parse(_data);
+	      _data = JSON.parse(_data);
 	
-	      // return _data;
+	      return _data;
 	      // console.log('_data', _data);
 	      tempData = {
 	        "accounts": [{
@@ -39381,10 +39387,13 @@
 	        "access_token": "test_wells"
 	      };
 	
-	      tempData.transactions.forEach(function (transaction) {
+	      _data.transactions.forEach(function (transaction) {
 	        transaction.amount = Math.abs(transaction.amount);
 	      });
-	      return tempData;
+	      // tempData.transactions.forEach(transaction => {
+	      // 	transaction.amount = Math.abs(transaction.amount);
+	      // })
+	      return _data;
 	    }
 	  }]);
 	
