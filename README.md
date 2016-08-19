@@ -16,4 +16,13 @@ http://www.brightplan.com/
 	<li>Plaid API</li>
 	<li>Node</li>
 	<li>Express</li>
+	<li>React ChartJS</li>
+	<li>Heroku</li>
 </ul>
+
+
+<p>
+	<strong style={color: yellow;}>Note: </strong>
+	This app was made in a night so the Plaid API is still in sandbox mode. When choosing the bank, the best to test the app would be
+	<strong>Wells Fargo</strong>.
+</p>
