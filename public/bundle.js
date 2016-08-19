@@ -92,7 +92,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".navbarbar {\n\tcolor: red;\n}\n\n.titleStyle {\n\tfont-size: 40px;\n\tfont-family: 'Lato', sans-serif;\n\t/*font-family: `'Droid Sans', sans-serif`;*/\n\t/*font-family: `'Droid Serif', serif`;*/\n\tcolor: #696969;\n}\n", ""]);
+	exports.push([module.id, "\n.navbarbar {\n\tcolor: red;\n}\n\n.titleStyle {\n\tfont-size: 40px;\n\tfont-family: 'Lato', sans-serif;\n\t/*font-family: `'Droid Sans', sans-serif`;*/\n\t/*font-family: `'Droid Serif', serif`;*/\n\tcolor: #696969;\n}\n", ""]);
 	
 	// exports
 
@@ -28338,6 +28338,17 @@
 							null,
 							'Select Bank'
 						)
+					),
+					_react2.default.createElement(
+						'h5',
+						{ style: styles.instructions },
+						'The Plaid API is still in sandbox mode. Please select ',
+						_react2.default.createElement(
+							'strong',
+							null,
+							'Wells Fargo'
+						),
+						' for testing purposes.'
 					)
 				);
 			}
@@ -28357,6 +28368,10 @@
 			width: 500,
 			height: 100,
 			borderWidth: 3
+		},
+		instructions: {
+			color: '#696969',
+			marginTop: 20
 		}
 	};
 
@@ -38895,7 +38910,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _data = void 0;
+	var _data = void 0,
+	    _tempData = void 0;
 	var tempData = void 0;
 	
 	var UserStore = function (_EventEmitter) {
@@ -38909,7 +38925,7 @@
 	    _AppDispatcher2.default.register(function (action) {
 	      switch (action.actionType) {
 	        case _Constants.ActionTypes.RECEIVE_DATA:
-	          _data = action.data;
+	          _tempData = action.data;
 	          _this.emit('receiveData');
 	
 	        default:
@@ -38945,8 +38961,8 @@
 	  }, {
 	    key: 'receiveData',
 	    value: function receiveData() {
-	      _data = JSON.parse(_data);
-	
+	      _tempData = JSON.parse(_tempData);
+	      _data = _tempData;
 	      return _data;
 	      // console.log('_data', _data);
 	      tempData = {
@@ -39740,6 +39756,10 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
+	var _API = __webpack_require__(/*! ../API */ 244);
+	
+	var _API2 = _interopRequireDefault(_API);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39759,13 +39779,33 @@
 			_this.state = {
 				data: {}
 			};
+	
+			_this.receiveData = _this.receiveData.bind(_this);
 			return _this;
 		}
 	
 		_createClass(Details, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
+				var infoObj = {
+					client_id: 'test_id',
+					secret: 'test_secret',
+					username: 'plaid_test',
+					password: 'plaid_good',
+					type: 'wells'
+				};
+				_API2.default.getData(infoObj);
+				_UserStore2.default.on("receiveData", this.receiveData);
+			}
+		}, {
+			key: 'receiveData',
+			value: function receiveData() {
 				this.setState({ data: _UserStore2.default.receiveData() });
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				_UserStore2.default.removeListener("receiveData", this.receiveData);
 			}
 		}, {
 			key: 'render',
@@ -40025,6 +40065,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 180);
+	
 	var _UserStore = __webpack_require__(/*! ../stores/UserStore */ 252);
 	
 	var _UserStore2 = _interopRequireDefault(_UserStore);
@@ -40091,11 +40133,18 @@
 			value: function render() {
 				var params = this.props.params;
 	
-				console.log('this.state', this.state);
-	
 				return _react2.default.createElement(
 					'div',
 					{ className: 'container' },
+					_react2.default.createElement(
+						'button',
+						{
+							className: 'btn btn-danger-outline',
+							onClick: function onClick() {
+								_reactRouter.browserHistory.push('/details');
+							} },
+						'Go Back'
+					),
 					this.state.account ? _react2.default.createElement(
 						'p',
 						{ className: 'titleStyle' },

@@ -2,7 +2,7 @@ import AppDispatcher from '../AppDispatcher';
 import { ActionTypes } from '../Constants';
 import { EventEmitter } from 'events';
 
-let _data;
+let _data, _tempData;
 let tempData;
 
 class UserStore extends EventEmitter {
@@ -12,7 +12,7 @@ class UserStore extends EventEmitter {
 		AppDispatcher.register(action => {
 			switch(action.actionType) {
 				case ActionTypes.RECEIVE_DATA:
-					_data = action.data;
+					_tempData = action.data;
 					this.emit('receiveData');
 
 				default:
@@ -44,8 +44,8 @@ class UserStore extends EventEmitter {
 	}
 
 	receiveData() {
-		_data = JSON.parse(_data);
-
+		_tempData = JSON.parse(_tempData);
+		_data = _tempData;
 		return _data;
 		// console.log('_data', _data);
 		tempData = {

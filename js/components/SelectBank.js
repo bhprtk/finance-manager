@@ -61,6 +61,10 @@ export default class SelectBank extends Component {
 						Select Bank
 					</h1>
 				</button>
+
+				<h5 style={styles.instructions}>
+					The Plaid API is still in sandbox mode. Please select <strong>Wells Fargo</strong> for testing purposes.
+				</h5>
 			</div>
 		)
 	}
@@ -68,11 +72,15 @@ export default class SelectBank extends Component {
 
 const styles = {
 	container: {
-		paddingTop: 300
+		paddingTop: 300,
 	},
 	button: {
 		width: 500,
 		height: 100,
 		borderWidth: 3
+	},
+	instructions: {
+		color: '#696969',
+		marginTop: 20
 	}
 }
