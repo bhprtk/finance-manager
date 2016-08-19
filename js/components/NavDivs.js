@@ -9,7 +9,6 @@ export default class NavDivs extends Component {
 	}
 
 	viewTransactions(accountId) {
-		// console.log('accountId', accountId);
 		browserHistory.push(`/transaction/${accountId}`);
 	}
 
@@ -17,7 +16,7 @@ export default class NavDivs extends Component {
 		const { account } = this.props;
 		return (
 			<div style={styles.container} className='text-md-center text-sm-center'>
-				
+
 				<div className="card col-md-5" style={styles.card}>
 					<div className="card-block">
 						<h5 className="card-title">{account.meta.name} {account.meta.number}</h5>

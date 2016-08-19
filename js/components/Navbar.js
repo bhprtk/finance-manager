@@ -5,7 +5,6 @@ import NavDivs from './NavDivs';
 export default class Navbar extends Component {
 	render() {
 		const { accounts } = this.props;
-		console.log('accounts', accounts);
 		return (
 			<div className="text-md-center">
 				<div className="container">

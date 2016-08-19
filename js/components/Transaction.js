@@ -8,7 +8,6 @@ export default class Transaction extends Component {
 	constructor(props) {
 		super(props);
 		const transactions = UserStore.receiveTransactions(this.props.params.accountId);
-		console.log('transactions', transactions);
 		this.state = {
 			datas: {
         labels: transactions.map(transaction => transaction.date).reverse(),

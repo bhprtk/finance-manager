@@ -18,8 +18,6 @@ export default class Details extends Component {
 
 
 	render() {
-
-		console.log('this.state', this.state);
 		return (
 			<If condition={this.state.data}>
 				<Navbar accounts={this.state.data.accounts}/>

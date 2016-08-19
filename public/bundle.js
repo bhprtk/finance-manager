@@ -39770,8 +39770,6 @@
 		}, {
 			key: 'render',
 			value: function render() {
-	
-				console.log('this.state', this.state);
 				return this.state.data ? _react2.default.createElement(_Navbar2.default, { accounts: this.state.data.accounts }) : null;
 			}
 		}]);
@@ -39826,7 +39824,6 @@
 			value: function render() {
 				var accounts = this.props.accounts;
 	
-				console.log('accounts', accounts);
 				return _react2.default.createElement(
 					'div',
 					{ className: 'text-md-center' },
@@ -39906,7 +39903,6 @@
 		_createClass(NavDivs, [{
 			key: 'viewTransactions',
 			value: function viewTransactions(accountId) {
-				// console.log('accountId', accountId);
 				_reactRouter.browserHistory.push('/transaction/' + accountId);
 			}
 		}, {
@@ -40056,7 +40052,6 @@
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Transaction).call(this, props));
 	
 			var transactions = _UserStore2.default.receiveTransactions(_this.props.params.accountId);
-			console.log('transactions', transactions);
 			_this.state = {
 				datas: {
 					labels: transactions.map(function (transaction) {
