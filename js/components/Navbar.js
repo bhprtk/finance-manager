@@ -9,7 +9,7 @@ export default class Navbar extends Component {
 		return (
 			<div className="text-md-center">
 				<div className="container">
-					<p style={styles.title}>ACCOUNTS</p>
+					<p className="titleStyle">ACCOUNTS</p>
 					<div className="row">
 						<If condition={accounts}>
 							{accounts.map((account, index) => {
@@ -29,11 +29,5 @@ export default class Navbar extends Component {
 const styles = {
 	navbar: {
 		height: 100
-	},
-	title: {
-		fontSize: 40,
-		fontFamily: `'Lato', sans-serif`,
-		// fontFamily: `'Droid Sans', sans-serif`
-		// fontFamily: `'Droid Serif', serif`
 	}
 }

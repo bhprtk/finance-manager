@@ -7,7 +7,7 @@ export default class TableData extends Component {
 
 	render() {
 		return (
-			<h1>TableData</h1>
+			<p className="titleStyle">TableData</p>
 		)
 	}
 }

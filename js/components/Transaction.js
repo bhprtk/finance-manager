@@ -46,7 +46,8 @@ export default class Transaction extends Component {
 
 	componentDidMount() {
 		this.setState({
-			transactions: UserStore.receiveTransactions(this.props.params.accountId)
+			transactions: UserStore.receiveTransactions(this.props.params.accountId),
+			account: UserStore.receiveAccount(this.props.params.accountId)
 		})
 	}
 
@@ -54,12 +55,18 @@ export default class Transaction extends Component {
 
 	render() {
 		const {params} = this.props;
-		console.log('params.accountId', params.accountId);
+		console.log('this.state', this.state);
+
 		return (
 			<div className="container">
+				<If condition={this.state.account}>
+					<p className="titleStyle">Spending Graph for {this.state.account[0].meta.name} {this.state.account[0].meta.number}</p>
+				</If>
+				<hr/>
 				<LineChart data={this.state.datas} options={this.state.scales} width="600" height="250"/>
-				<TableData />
+				<hr/>
 
+				<TableData />
 			</div>
 		)
 	}

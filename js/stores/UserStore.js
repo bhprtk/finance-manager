@@ -3,6 +3,7 @@ import { ActionTypes } from '../Constants';
 import { EventEmitter } from 'events';
 
 let _data;
+let tempData;
 
 class UserStore extends EventEmitter {
 	constructor(props) {
@@ -21,19 +22,28 @@ class UserStore extends EventEmitter {
 
 	}
 
-	receiveTransactions(accountId) {
-
-		return _data.transactions.filter(transaction => {
-			return (transaction._account === accountId);
+	receiveAccount(accountId) {
+		return tempData.accounts.filter(account => {
+			return (account._id === accountId);
 		})
 	}
 
-	receiveData() {
-		_data = JSON.parse(_data);
+	receiveTransactions(accountId) {
 
-		return _data;
+		return tempData.transactions.filter(transaction => {
+			return (transaction._account === accountId);
+		})
+		// return _data.transactions.filter(transaction => {
+		// 	return (transaction._account === accountId);
+		// })
+	}
+
+	receiveData() {
+		// _data = JSON.parse(_data);
+
+		// return _data;
 		// console.log('_data', _data);
-		let data = {
+		tempData = {
   "accounts": [
     {
       "_id": "QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK",
@@ -545,7 +555,7 @@ class UserStore extends EventEmitter {
   "access_token": "test_wells"
 }
 
-// return data;
+return tempData;
 	}
 
 }

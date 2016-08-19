@@ -92,7 +92,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".navbarbar {\n\tcolor: red;\n}\n", ""]);
+	exports.push([module.id, ".navbarbar {\n\tcolor: red;\n}\n\n.titleStyle {\n\tfont-size: 40px;\n\tfont-family: 'Lato', sans-serif;\n\t/*font-family: `'Droid Sans', sans-serif`;*/\n\t/*font-family: `'Droid Serif', serif`;*/\n}\n", ""]);
 	
 	// exports
 
@@ -38896,6 +38896,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _data = void 0;
+	var tempData = void 0;
 	
 	var UserStore = function (_EventEmitter) {
 	  _inherits(UserStore, _EventEmitter);
@@ -38919,21 +38920,31 @@
 	  }
 	
 	  _createClass(UserStore, [{
+	    key: 'receiveAccount',
+	    value: function receiveAccount(accountId) {
+	      return tempData.accounts.filter(function (account) {
+	        return account._id === accountId;
+	      });
+	    }
+	  }, {
 	    key: 'receiveTransactions',
 	    value: function receiveTransactions(accountId) {
 	
-	      return _data.transactions.filter(function (transaction) {
+	      return tempData.transactions.filter(function (transaction) {
 	        return transaction._account === accountId;
 	      });
+	      // return _data.transactions.filter(transaction => {
+	      // 	return (transaction._account === accountId);
+	      // })
 	    }
 	  }, {
 	    key: 'receiveData',
 	    value: function receiveData() {
-	      _data = JSON.parse(_data);
+	      // _data = JSON.parse(_data);
 	
-	      return _data;
+	      // return _data;
 	      // console.log('_data', _data);
-	      var data = {
+	      tempData = {
 	        "accounts": [{
 	          "_id": "QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK",
 	          "_item": "KdDjmojBERUKx3JkDd9RuxA5EvejA4SENO4AA",
@@ -39371,7 +39382,7 @@
 	        "access_token": "test_wells"
 	      };
 	
-	      // return data;
+	      return tempData;
 	    }
 	  }]);
 	
@@ -39813,7 +39824,7 @@
 						{ className: 'container' },
 						_react2.default.createElement(
 							'p',
-							{ style: styles.title },
+							{ className: 'titleStyle' },
 							'ACCOUNTS'
 						),
 						_react2.default.createElement(
@@ -39837,10 +39848,6 @@
 	var styles = {
 		navbar: {
 			height: 100
-		},
-		title: {
-			fontSize: 40,
-			fontFamily: '\'Lato\', sans-serif'
 		}
 	};
 
@@ -40002,7 +40009,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -40015,7 +40022,7 @@
 	
 	var _UserStore2 = _interopRequireDefault(_UserStore);
 	
-	var _TableData = __webpack_require__(/*! ./TableData */ 268);
+	var _TableData = __webpack_require__(/*! ./TableData */ 258);
 	
 	var _TableData2 = _interopRequireDefault(_TableData);
 	
@@ -40027,103 +40034,167 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var LineChart = __webpack_require__(/*! react-chartjs */ 258).Line;
+	var LineChart = __webpack_require__(/*! react-chartjs */ 259).Line;
 	
 	var Transaction = function (_Component) {
-	  _inherits(Transaction, _Component);
+		_inherits(Transaction, _Component);
 	
-	  function Transaction(props) {
-	    _classCallCheck(this, Transaction);
+		function Transaction(props) {
+			_classCallCheck(this, Transaction);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Transaction).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Transaction).call(this, props));
 	
-	    var transactions = _UserStore2.default.receiveTransactions(_this.props.params.accountId);
-	    console.log('transactions', transactions);
-	    _this.state = {
-	      datas: {
-	        labels: transactions.map(function (transaction) {
-	          return transaction.date;
-	        }).reverse(),
-	        datasets: [{
-	          label: '# of Votes',
-	          data: transactions.map(function (transaction) {
-	            return transaction.amount.toFixed(2);
-	          }).reverse(),
-	          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-	          borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-	          borderWidth: 2
-	        }]
-	      },
-	      scales: {
-	        yAxes: [{
-	          ticks: {
-	            beginAtZero: true
-	          }
-	        }]
-	      }
-	    };
-	    return _this;
-	  }
+			var transactions = _UserStore2.default.receiveTransactions(_this.props.params.accountId);
+			console.log('transactions', transactions);
+			_this.state = {
+				datas: {
+					labels: transactions.map(function (transaction) {
+						return transaction.date;
+					}).reverse(),
+					datasets: [{
+						label: '# of Votes',
+						data: transactions.map(function (transaction) {
+							return transaction.amount.toFixed(2);
+						}).reverse(),
+						backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+						borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+						borderWidth: 2
+					}]
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			};
+			return _this;
+		}
 	
-	  _createClass(Transaction, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.setState({
-	        transactions: _UserStore2.default.receiveTransactions(this.props.params.accountId)
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var params = this.props.params;
+		_createClass(Transaction, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.setState({
+					transactions: _UserStore2.default.receiveTransactions(this.props.params.accountId),
+					account: _UserStore2.default.receiveAccount(this.props.params.accountId)
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var params = this.props.params;
 	
-	      console.log('params.accountId', params.accountId);
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
-	        _react2.default.createElement(LineChart, { data: this.state.datas, options: this.state.scales, width: '600', height: '250' }),
-	        _react2.default.createElement(_TableData2.default, null)
-	      );
-	    }
-	  }]);
+				console.log('this.state', this.state);
 	
-	  return Transaction;
+				return _react2.default.createElement(
+					'div',
+					{ className: 'container' },
+					this.state.account ? _react2.default.createElement(
+						'p',
+						{ className: 'titleStyle' },
+						'Spending Graph for ',
+						this.state.account[0].meta.name,
+						' ',
+						this.state.account[0].meta.number
+					) : null,
+					_react2.default.createElement('hr', null),
+					_react2.default.createElement(LineChart, { data: this.state.datas, options: this.state.scales, width: '600', height: '250' }),
+					_react2.default.createElement('hr', null),
+					_react2.default.createElement(_TableData2.default, null)
+				);
+			}
+		}]);
+	
+		return Transaction;
 	}(_react.Component);
 	
 	exports.default = Transaction;
 
 /***/ },
 /* 258 */
+/*!************************************!*\
+  !*** ./js/components/TableData.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TableData = function (_Component) {
+		_inherits(TableData, _Component);
+	
+		function TableData(props) {
+			_classCallCheck(this, TableData);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(TableData).call(this, props));
+		}
+	
+		_createClass(TableData, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"p",
+					{ className: "titleStyle" },
+					"TableData"
+				);
+			}
+		}]);
+	
+		return TableData;
+	}(_react.Component);
+	
+	exports.default = TableData;
+
+/***/ },
+/* 259 */
 /*!**********************************!*\
   !*** ./~/react-chartjs/index.js ***!
   \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  Bar: __webpack_require__(/*! ./lib/bar */ 259),
-	  Doughnut: __webpack_require__(/*! ./lib/doughnut */ 263),
-	  Line: __webpack_require__(/*! ./lib/line */ 264),
-	  Pie: __webpack_require__(/*! ./lib/pie */ 265),
-	  PolarArea: __webpack_require__(/*! ./lib/polar-area */ 266),
-	  Radar: __webpack_require__(/*! ./lib/radar */ 267),
-	  createClass: __webpack_require__(/*! ./lib/core */ 260).createClass
+	  Bar: __webpack_require__(/*! ./lib/bar */ 260),
+	  Doughnut: __webpack_require__(/*! ./lib/doughnut */ 264),
+	  Line: __webpack_require__(/*! ./lib/line */ 265),
+	  Pie: __webpack_require__(/*! ./lib/pie */ 266),
+	  PolarArea: __webpack_require__(/*! ./lib/polar-area */ 267),
+	  Radar: __webpack_require__(/*! ./lib/radar */ 268),
+	  createClass: __webpack_require__(/*! ./lib/core */ 261).createClass
 	};
 
 
 /***/ },
-/* 259 */
+/* 260 */
 /*!************************************!*\
   !*** ./~/react-chartjs/lib/bar.js ***!
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(/*! ./core */ 260);
+	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('Bar', ['getBarsAtEvent']);
 
 
 /***/ },
-/* 260 */
+/* 261 */
 /*!*************************************!*\
   !*** ./~/react-chartjs/lib/core.js ***!
   \*************************************/
@@ -40189,7 +40260,7 @@
 	    };
 	
 	    classData.initializeChart = function(nextProps) {
-	      var Chart = __webpack_require__(/*! chart.js */ 261);
+	      var Chart = __webpack_require__(/*! chart.js */ 262);
 	      var el = ReactDOM.findDOMNode(this);
 	      var ctx = el.getContext("2d");
 	      var chart = new Chart(ctx)[chartType](nextProps.data, nextProps.options || {});
@@ -40280,7 +40351,7 @@
 
 
 /***/ },
-/* 261 */
+/* 262 */
 /*!*****************************!*\
   !*** ./~/chart.js/Chart.js ***!
   \*****************************/
@@ -40597,7 +40668,7 @@
 				//Method for warning of errors
 				if (window.console && typeof window.console.warn === "function") console.warn(str);
 			},
-			amd = helpers.amd = ("function" === 'function' && __webpack_require__(/*! !webpack amd options */ 262)),
+			amd = helpers.amd = ("function" === 'function' && __webpack_require__(/*! !webpack amd options */ 263)),
 			//-- Math methods
 			isNumber = helpers.isNumber = function(n){
 				return !isNaN(parseFloat(n)) && isFinite(n);
@@ -44025,7 +44096,7 @@
 
 
 /***/ },
-/* 262 */
+/* 263 */
 /*!****************************************!*\
   !*** (webpack)/buildin/amd-options.js ***!
   \****************************************/
@@ -44036,116 +44107,64 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 263 */
+/* 264 */
 /*!*****************************************!*\
   !*** ./~/react-chartjs/lib/doughnut.js ***!
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(/*! ./core */ 260);
+	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('Doughnut', ['getSegmentsAtEvent']);
 
 
 /***/ },
-/* 264 */
+/* 265 */
 /*!*************************************!*\
   !*** ./~/react-chartjs/lib/line.js ***!
   \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(/*! ./core */ 260);
+	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('Line', ['getPointsAtEvent']);
 
 
 /***/ },
-/* 265 */
+/* 266 */
 /*!************************************!*\
   !*** ./~/react-chartjs/lib/pie.js ***!
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(/*! ./core */ 260);
+	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('Pie', ['getSegmentsAtEvent']);
 
 
 /***/ },
-/* 266 */
+/* 267 */
 /*!*******************************************!*\
   !*** ./~/react-chartjs/lib/polar-area.js ***!
   \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(/*! ./core */ 260);
+	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('PolarArea', ['getSegmentsAtEvent']);
 
 
 /***/ },
-/* 267 */
+/* 268 */
 /*!**************************************!*\
   !*** ./~/react-chartjs/lib/radar.js ***!
   \**************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(/*! ./core */ 260);
+	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('Radar', ['getPointsAtEvent']);
 
-
-/***/ },
-/* 268 */
-/*!************************************!*\
-  !*** ./js/components/TableData.js ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var TableData = function (_Component) {
-		_inherits(TableData, _Component);
-	
-		function TableData(props) {
-			_classCallCheck(this, TableData);
-	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(TableData).call(this, props));
-		}
-	
-		_createClass(TableData, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'h1',
-					null,
-					'TableData'
-				);
-			}
-		}]);
-	
-		return TableData;
-	}(_react.Component);
-	
-	exports.default = TableData;
 
 /***/ }
 /******/ ]);

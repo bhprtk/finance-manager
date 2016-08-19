@@ -1,3 +1,10 @@
 .navbarbar {
 	color: red;
 }
+
+.titleStyle {
+	font-size: 40px;
+	font-family: 'Lato', sans-serif;
+	/*font-family: `'Droid Sans', sans-serif`;*/
+	/*font-family: `'Droid Serif', serif`;*/
+}
