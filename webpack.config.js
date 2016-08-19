@@ -1,6 +1,9 @@
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: "./js/app.js",
+  entry: [
+    './js/styles/style.css',
+    "./js/app.js"
+  ],
   output: {
     path: __dirname + "/public",
     filename: "bundle.js"
@@ -12,7 +15,8 @@ module.exports = {
           presets: ['react', 'es2015'],
           plugins: ["jsx-control-statements"]
          }
-      }
+      },
+      {test: /(\.css)$/, loaders: ['style', 'css']}
     ]
   },
 };

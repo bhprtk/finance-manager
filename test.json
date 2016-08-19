@@ -1,44 +1,4 @@
-import AppDispatcher from '../AppDispatcher';
-import { ActionTypes } from '../Constants';
-import { EventEmitter } from 'events';
-
-let _data;
-
-class UserStore extends EventEmitter {
-	constructor(props) {
-		super(props);
-
-		AppDispatcher.register(action => {
-			switch(action.actionType) {
-				case ActionTypes.RECEIVE_DATA:
-					_data = action.data;
-					this.emit('receiveData');
-
-				default:
-			}
-
-		})
-
-	}
-
-	recieveTransactions(accountId) {
-		console.log('accountId', accountId);
-		console.log('_data', _data);
-		return _data.transactions.filter(transaction => {
-			console.log('transaction._account' , typeof transaction._account);
-			console.log('accountId' , typeof accountId);
-			console.log('transaction._account === accountId', (transaction._account === accountId));
-			return (transaction._account === accountId);
-		})
-	}
-
-	receiveData() {
-		_data = JSON.parse(_data);
-
-		return _data;
-		// console.log('_data', _data);
-		let data = {
-  "accounts": [
+"accounts": [
     {
       "_id": "QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK",
       "_item": "KdDjmojBERUKx3JkDd9RuxA5EvejA4SENO4AA",
@@ -548,10 +508,3 @@ class UserStore extends EventEmitter {
   ],
   "access_token": "test_wells"
 }
-
-// return data;
-	}
-
-}
-
-export default new UserStore();
