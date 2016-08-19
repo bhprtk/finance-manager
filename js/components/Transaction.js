@@ -56,12 +56,13 @@ export default class Transaction extends Component {
 	render() {
 		const {params} = this.props;
 		return (
-			<div className="container">
+			<div className="container" style={styles.container}>
 
 				<button
 					className="btn btn-danger-outline"
-					onClick={() => {browserHistory.push('/details')}}>
-					Go Back
+					onClick={() => {browserHistory.push('/details')}}
+					style={styles.backButton}>
+					<h5>Go Back</h5>
 				</button>
 
 				<If condition={this.state.account}>
@@ -76,5 +77,14 @@ export default class Transaction extends Component {
 			</If>
 			</div>
 		)
+	}
+}
+
+const styles = {
+	container: {
+		paddingTop: 20
+	},
+	backButton: {
+		borderWidth: 2,
 	}
 }

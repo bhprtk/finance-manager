@@ -28295,15 +28295,14 @@
 		}, {
 			key: 'openSandbox',
 			value: function openSandbox() {
-				var _this2 = this;
-	
 				var sandboxHandler = Plaid.create({
 					env: 'tartan',
 					clientName: 'Client Name',
 					key: 'test_key',
 					product: 'connect',
 					onSuccess: function onSuccess(public_token, metadata) {
-						_this2.getData(metadata.institution.type);
+						// this.getData(metadata.institution.type)
+						_reactRouter.browserHistory.push('/details');
 					}
 				});
 				sandboxHandler.open();
@@ -39748,6 +39747,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactSpinkit = __webpack_require__(/*! react-spinkit */ 269);
+	
+	var _reactSpinkit2 = _interopRequireDefault(_reactSpinkit);
+	
 	var _UserStore = __webpack_require__(/*! ../stores/UserStore */ 252);
 	
 	var _UserStore2 = _interopRequireDefault(_UserStore);
@@ -40135,15 +40138,20 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ className: 'container' },
+					{ className: 'container', style: styles.container },
 					_react2.default.createElement(
 						'button',
 						{
 							className: 'btn btn-danger-outline',
 							onClick: function onClick() {
 								_reactRouter.browserHistory.push('/details');
-							} },
-						'Go Back'
+							},
+							style: styles.backButton },
+						_react2.default.createElement(
+							'h5',
+							null,
+							'Go Back'
+						)
 					),
 					this.state.account ? _react2.default.createElement(
 						'p',
@@ -40165,6 +40173,16 @@
 	}(_react.Component);
 	
 	exports.default = Transaction;
+	
+	
+	var styles = {
+		container: {
+			paddingTop: 20
+		},
+		backButton: {
+			borderWidth: 2
+		}
+	};
 
 /***/ },
 /* 258 */
@@ -44304,6 +44322,857 @@
 	var vars = __webpack_require__(/*! ./core */ 261);
 	
 	module.exports = vars.createClass('Radar', ['getPointsAtEvent']);
+
+
+/***/ },
+/* 269 */
+/*!***************************************!*\
+  !*** ./~/react-spinkit/dist/index.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 270);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _objectAssign = __webpack_require__(/*! object-assign */ 9);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line import/no-extraneous-dependencies
+	
+	
+	var Spinner = function (_React$Component) {
+	  _inherits(Spinner, _React$Component);
+	
+	  function Spinner(props) {
+	    _classCallCheck(this, Spinner);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Spinner).call(this, props));
+	
+	    _this.displayName = 'SpinKit';
+	    return _this;
+	  }
+	
+	  _createClass(Spinner, [{
+	    key: 'render',
+	    value: function render() {
+	      var _cx;
+	
+	      var classes = (0, _classnames2.default)((_cx = {
+	        'fade-in': !this.props.noFadeIn,
+	        spinner: this.props.overrideSpinnerClassName === ''
+	      }, _defineProperty(_cx, this.props.overrideSpinnerClassName, !!this.props.overrideSpinnerClassName), _defineProperty(_cx, this.props.className, !!this.props.className), _cx));
+	
+	      var props = (0, _objectAssign2.default)({}, this.props);
+	      delete props.spinnerName;
+	      delete props.noFadeIn;
+	      delete props.overrideSpinnerClassName;
+	      delete props.className;
+	
+	      if (!this.props.noFadeIn) {
+	        __webpack_require__(/*! ../css/fade-in.css */ 271); // eslint-disable-line global-require
+	      }
+	
+	      // Include spinner-specific css
+	      __webpack_require__(/*! ../css */ 273)("./" + this.props.spinnerName + '.css'); // eslint-disable-line global-require
+	
+	      var spinnerEl = void 0;
+	      switch (this.props.spinnerName) {
+	        case 'double-bounce':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: 'double-bounce ' + classes }),
+	            _react2.default.createElement('div', { className: 'double-bounce1' }),
+	            _react2.default.createElement('div', { className: 'double-bounce2' })
+	          );
+	          break;
+	        case 'rotating-plane':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: classes }),
+	            _react2.default.createElement('div', { className: 'rotating-plane' })
+	          );
+	          break;
+	        case 'wave':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: 'wave ' + classes }),
+	            _react2.default.createElement('div', { className: 'rect1' }),
+	            _react2.default.createElement('div', { className: 'rect2' }),
+	            _react2.default.createElement('div', { className: 'rect3' }),
+	            _react2.default.createElement('div', { className: 'rect4' }),
+	            _react2.default.createElement('div', { className: 'rect5' })
+	          );
+	          break;
+	        case 'wandering-cubes':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: 'wandering-cubes ' + classes }),
+	            _react2.default.createElement('div', { className: 'cube1' }),
+	            _react2.default.createElement('div', { className: 'cube2' })
+	          );
+	          break;
+	        case 'pulse':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: classes }),
+	            _react2.default.createElement('div', { className: 'pulse' })
+	          );
+	          break;
+	        case 'chasing-dots':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: classes }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'chasing-dots' },
+	              _react2.default.createElement('div', { className: 'dot1' }),
+	              _react2.default.createElement('div', { className: 'dot2' })
+	            )
+	          );
+	          break;
+	        case 'circle':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: 'circle-wrapper ' + classes }),
+	            _react2.default.createElement('div', { className: 'circle1 circle' }),
+	            _react2.default.createElement('div', { className: 'circle2 circle' }),
+	            _react2.default.createElement('div', { className: 'circle3 circle' }),
+	            _react2.default.createElement('div', { className: 'circle4 circle' }),
+	            _react2.default.createElement('div', { className: 'circle5 circle' }),
+	            _react2.default.createElement('div', { className: 'circle6 circle' }),
+	            _react2.default.createElement('div', { className: 'circle7 circle' }),
+	            _react2.default.createElement('div', { className: 'circle8 circle' }),
+	            _react2.default.createElement('div', { className: 'circle9 circle' }),
+	            _react2.default.createElement('div', { className: 'circle10 circle' }),
+	            _react2.default.createElement('div', { className: 'circle11 circle' }),
+	            _react2.default.createElement('div', { className: 'circle12 circle' })
+	          );
+	          break;
+	        case 'cube-grid':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: 'cube-grid ' + classes }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' }),
+	            _react2.default.createElement('div', { className: 'cube' })
+	          );
+	          break;
+	        case 'wordpress':
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: classes }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'wordpress' },
+	              _react2.default.createElement('div', { className: 'inner-circle' })
+	            )
+	          );
+	          break;
+	        case 'three-bounce':
+	        default:
+	          spinnerEl = _react2.default.createElement(
+	            'div',
+	            _extends({}, props, { className: 'three-bounce ' + classes }),
+	            _react2.default.createElement('div', { className: 'bounce1' }),
+	            _react2.default.createElement('div', { className: 'bounce2' }),
+	            _react2.default.createElement('div', { className: 'bounce3' })
+	          );
+	      }
+	      return spinnerEl;
+	    }
+	  }]);
+	
+	  return Spinner;
+	}(_react2.default.Component);
+	
+	exports.default = Spinner;
+	
+	
+	Spinner.propTypes = {
+	  spinnerName: _react2.default.PropTypes.string.isRequired,
+	  noFadeIn: _react2.default.PropTypes.bool,
+	  overrideSpinnerClassName: _react2.default.PropTypes.string,
+	  className: _react2.default.PropTypes.string
+	};
+	
+	Spinner.defaultProps = {
+	  spinnerName: 'three-bounce',
+	  noFadeIn: false,
+	  overrideSpinnerClassName: ''
+	};
+
+/***/ },
+/* 270 */
+/*!*******************************!*\
+  !*** ./~/classnames/index.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 271 */
+/*!*****************************************!*\
+  !*** ./~/react-spinkit/css/fade-in.css ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./fade-in.css */ 272);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./fade-in.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./fade-in.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 272 */
+/*!********************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/fade-in.css ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "@-webkit-keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n@-moz-keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n@-ms-keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n@keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n.fade-in {\n  -webkit-animation: fade-in 2s;\n  -moz-animation: fade-in 2s;\n  -o-animation: fade-in 2s;\n  -ms-animation: fade-in 2s;\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 273 */
+/*!*******************************************!*\
+  !*** ./~/react-spinkit/css ^\.\/.*\.css$ ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./chasing-dots.css": 274,
+		"./circle.css": 276,
+		"./cube-grid.css": 278,
+		"./double-bounce.css": 280,
+		"./fade-in.css": 271,
+		"./fading-circle.css": 282,
+		"./pulse.css": 284,
+		"./rotating-plane.css": 286,
+		"./three-bounce.css": 288,
+		"./wandering-cubes.css": 290,
+		"./wave.css": 292,
+		"./wordpress.css": 294
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 273;
+
+
+/***/ },
+/* 274 */
+/*!**********************************************!*\
+  !*** ./~/react-spinkit/css/chasing-dots.css ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./chasing-dots.css */ 275);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./chasing-dots.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./chasing-dots.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 275 */
+/*!*************************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/chasing-dots.css ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".chasing-dots {\n  width: 27px;\n  height: 27px;\n  position: relative;\n\n  -webkit-animation: rotate 2.0s infinite linear;\n  animation: rotate 2.0s infinite linear;\n}\n\n.dot1, .dot2 {\n  width: 60%;\n  height: 60%;\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  background-color: #333;\n  border-radius: 100%;\n\n  -webkit-animation: bounce 2.0s infinite ease-in-out;\n  animation: bounce 2.0s infinite ease-in-out;\n}\n\n.dot2 {\n  top: auto;\n  bottom: 0px;\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}\n@keyframes rotate {\n  100% {\n    transform: rotate(360deg);\n    -webkit-transform: rotate(360deg);\n  }\n}\n\n@-webkit-keyframes bounce {\n  0%, 100% { -webkit-transform: scale(0.0) }\n  50% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bounce {\n  0%, 100% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 50% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 276 */
+/*!****************************************!*\
+  !*** ./~/react-spinkit/css/circle.css ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./circle.css */ 277);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./circle.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./circle.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 277 */
+/*!*******************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/circle.css ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".circle-wrapper {\n  width: 22px;\n  height: 22px;\n  position: relative;\n}\n\n.circle {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.circle:before {\n  content: '';\n  display: block;\n  margin: 0 auto;\n  width: 20%;\n  height: 20%;\n  background-color: #333;\n\n  border-radius: 100%;\n  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;\n  animation: bouncedelay 1.2s infinite ease-in-out;\n  /* Prevent first frame from flickering when animation starts */\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n\n.circle2  { -webkit-transform: rotate(30deg);  transform: rotate(30deg)  }\n.circle3  { -webkit-transform: rotate(60deg);  transform: rotate(60deg)  }\n.circle4  { -webkit-transform: rotate(90deg);  transform: rotate(90deg)  }\n.circle5  { -webkit-transform: rotate(120deg); transform: rotate(120deg) }\n.circle6  { -webkit-transform: rotate(150deg); transform: rotate(150deg) }\n.circle7  { -webkit-transform: rotate(180deg); transform: rotate(180deg) }\n.circle8  { -webkit-transform: rotate(210deg); transform: rotate(210deg) }\n.circle9  { -webkit-transform: rotate(240deg); transform: rotate(240deg) }\n.circle10 { -webkit-transform: rotate(270deg); transform: rotate(270deg) }\n.circle11 { -webkit-transform: rotate(300deg); transform: rotate(300deg) }\n.circle12 { -webkit-transform: rotate(330deg); transform: rotate(330deg) }\n\n.circle2:before  { -webkit-animation-delay: -1.1s; animation-delay: -1.1s }\n.circle3:before  { -webkit-animation-delay: -1.0s; animation-delay: -1.0s }\n.circle4:before  { -webkit-animation-delay: -0.9s; animation-delay: -0.9s }\n.circle5:before  { -webkit-animation-delay: -0.8s; animation-delay: -0.8s }\n.circle6:before  { -webkit-animation-delay: -0.7s; animation-delay: -0.7s }\n.circle7:before  { -webkit-animation-delay: -0.6s; animation-delay: -0.6s }\n.circle8:before  { -webkit-animation-delay: -0.5s; animation-delay: -0.5s }\n.circle9:before  { -webkit-animation-delay: -0.4s; animation-delay: -0.4s }\n.circle10:before { -webkit-animation-delay: -0.3s; animation-delay: -0.3s }\n.circle11:before { -webkit-animation-delay: -0.2s; animation-delay: -0.2s }\n.circle12:before { -webkit-animation-delay: -0.1s; animation-delay: -0.1s }\n\n@-webkit-keyframes bouncedelay {\n  0%, 80%, 100% { -webkit-transform: scale(0.0) }\n  40% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bouncedelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0.0);\n    transform: scale(0.0);\n  } 40% {\n    -webkit-transform: scale(1.0);\n    transform: scale(1.0);\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 278 */
+/*!*******************************************!*\
+  !*** ./~/react-spinkit/css/cube-grid.css ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./cube-grid.css */ 279);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./cube-grid.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./cube-grid.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 279 */
+/*!**********************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/cube-grid.css ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".cube-grid {\n  width:27px;\n  height:27px;\n}\n\n.cube {\n  width:33%;\n  height:33%;\n  background:#333;\n  float:left;\n  -webkit-animation: scaleDelay 1.3s infinite ease-in-out;\n  animation: scaleDelay 1.3s infinite ease-in-out;\n}\n\n/*\n * Spinner positions\n * 1 2 3\n * 4 5 6\n * 7 8 9\n */\n\n.spinner .cube:nth-child(1) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }\n.spinner .cube:nth-child(2) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s  }\n.spinner .cube:nth-child(3) { -webkit-animation-delay: 0.4s; animation-delay: 0.4s  }\n.spinner .cube:nth-child(4) { -webkit-animation-delay: 0.1s; animation-delay: 0.1s  }\n.spinner .cube:nth-child(5) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }\n.spinner .cube:nth-child(6) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s  }\n.spinner .cube:nth-child(7) { -webkit-animation-delay: 0.0s; animation-delay: 0.0s  }\n.spinner .cube:nth-child(8) { -webkit-animation-delay: 0.1s; animation-delay: 0.1s  }\n.spinner .cube:nth-child(9) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }\n\n@-webkit-keyframes scaleDelay {\n  0%, 70%, 100% { -webkit-transform:scale3D(1.0, 1.0, 1.0) }\n  35%           { -webkit-transform:scale3D(0.0, 0.0, 1.0) }\n}\n\n@keyframes scaleDelay {\n  0%, 70%, 100% { -webkit-transform:scale3D(1.0, 1.0, 1.0); transform:scale3D(1.0, 1.0, 1.0) }\n  35%           { -webkit-transform:scale3D(1.0, 1.0, 1.0); transform:scale3D(0.0, 0.0, 1.0) }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 280 */
+/*!***********************************************!*\
+  !*** ./~/react-spinkit/css/double-bounce.css ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./double-bounce.css */ 281);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./double-bounce.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./double-bounce.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 281 */
+/*!**************************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/double-bounce.css ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".double-bounce {\n  width: 27px;\n  height: 27px;\n\n  position: relative;\n}\n\n.double-bounce1, .double-bounce2 {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n  background-color: #333;\n  opacity: 0.6;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  -webkit-animation: bounce 2.0s infinite ease-in-out;\n  animation: bounce 2.0s infinite ease-in-out;\n}\n\n.double-bounce2 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n@-webkit-keyframes bounce {\n  0%, 100% { -webkit-transform: scale(0.0) }\n  50% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bounce {\n  0%, 100% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 50% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 282 */
+/*!***********************************************!*\
+  !*** ./~/react-spinkit/css/fading-circle.css ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./fading-circle.css */ 283);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./fading-circle.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./fading-circle.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 283 */
+/*!**************************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/fading-circle.css ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".fading-circle {\n  width: 22px;\n  height: 22px;\n  position: relative;\n}\n\n.fading-circle .circle {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.fading-circle .circle:before {\n  content: '';\n  display: block;\n  margin: 0 auto;\n  width: 18%;\n  height: 18%;\n  background-color: #333;\n\n  border-radius: 100%;\n  -webkit-animation: fadedelay 1.2s infinite ease-in-out;\n  animation: fadedelay 1.2s infinite ease-in-out;\n  /* Prevent first frame from flickering when animation starts */\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n\n.circle2  { transform: rotate(30deg);  -webkit-transform: rotate(30deg)  }\n.circle3  { transform: rotate(60deg);  -webkit-transform: rotate(60deg)  }\n.circle4  { transform: rotate(90deg);  -webkit-transform: rotate(90deg)  }\n.circle5  { transform: rotate(120deg); -webkit-transform: rotate(120deg) }\n.circle6  { transform: rotate(150deg); -webkit-transform: rotate(150deg) }\n.circle7  { transform: rotate(180deg); -webkit-transform: rotate(180deg) }\n.circle8  { transform: rotate(210deg); -webkit-transform: rotate(210deg) }\n.circle9  { transform: rotate(240deg); -webkit-transform: rotate(240deg) }\n.circle10 { transform: rotate(270deg); -webkit-transform: rotate(270deg) }\n.circle11 { transform: rotate(300deg); -webkit-transform: rotate(300deg) }\n.circle12 { transform: rotate(330deg); -webkit-transform: rotate(330deg) }\n\n.circle2:before  { animation-delay: -1.1s; -webkit-animation-delay: -1.1s }\n.circle3:before  { animation-delay: -1.0s; -webkit-animation-delay: -1.0s }\n.circle4:before  { animation-delay: -0.9s; -webkit-animation-delay: -0.9s }\n.circle5:before  { animation-delay: -0.8s; -webkit-animation-delay: -0.8s }\n.circle6:before  { animation-delay: -0.7s; -webkit-animation-delay: -0.7s }\n.circle7:before  { animation-delay: -0.6s; -webkit-animation-delay: -0.6s }\n.circle8:before  { animation-delay: -0.5s; -webkit-animation-delay: -0.5s }\n.circle9:before  { animation-delay: -0.4s; -webkit-animation-delay: -0.4s }\n.circle10:before { animation-delay: -0.3s; -webkit-animation-delay: -0.3s }\n.circle11:before { animation-delay: -0.2s; -webkit-animation-delay: -0.2s }\n.circle12:before { animation-delay: -0.1s; -webkit-animation-delay: -0.1s }\n\n@keyframes fadedelay {\n  0%, 39%, 100% { opacity: 0 }\n  40% { opacity: 0 }\n}\n\n@-webkit-keyframes fadedelay {\n  0%, 39%, 100% { opacity: 0 }\n  40% { opacity: 1 }\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 284 */
+/*!***************************************!*\
+  !*** ./~/react-spinkit/css/pulse.css ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./pulse.css */ 285);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./pulse.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./pulse.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 285 */
+/*!******************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/pulse.css ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".pulse {\n  width: 27px;\n  height: 27px;\n  background-color: #333;\n\n  border-radius: 100%;\n  -webkit-animation: scaleout 1.0s infinite ease-in-out;\n  animation: scaleout 1.0s infinite ease-in-out;\n}\n\n@-webkit-keyframes scaleout {\n  0% { -webkit-transform: scale(0.0) }\n  100% {\n    -webkit-transform: scale(1.0);\n    opacity: 0;\n  }\n}\n\n@keyframes scaleout {\n  0% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 100% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n    opacity: 0;\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 286 */
+/*!************************************************!*\
+  !*** ./~/react-spinkit/css/rotating-plane.css ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./rotating-plane.css */ 287);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./rotating-plane.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./rotating-plane.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 287 */
+/*!***************************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/rotating-plane.css ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".rotating-plane {\n  width: 27px;\n  height: 27px;\n  background-color: #333;\n\n  -webkit-animation: rotateplane 1.2s infinite ease-in-out;\n  animation: rotateplane 1.2s infinite ease-in-out;\n}\n\n@-webkit-keyframes rotateplane {\n  0% { -webkit-transform: perspective(120px) }\n  50% { -webkit-transform: perspective(120px) rotateY(180deg) }\n  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }\n}\n\n@keyframes rotateplane {\n  0% {\n    transform: perspective(120px) rotateX(0deg) rotateY(0deg);\n    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);\n  } 50% {\n    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);\n    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);\n  } 100% {\n    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);\n    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 288 */
+/*!**********************************************!*\
+  !*** ./~/react-spinkit/css/three-bounce.css ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./three-bounce.css */ 289);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./three-bounce.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./three-bounce.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 289 */
+/*!*************************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/three-bounce.css ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".three-bounce > div {\n  width: 18px;\n  height: 18px;\n  background-color: #333;\n\n  border-radius: 100%;\n  display: inline-block;\n  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;\n  animation: bouncedelay 1.4s infinite ease-in-out;\n  /* Prevent first frame from flickering when animation starts */\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n\n.three-bounce .bounce1 {\n  -webkit-animation-delay: -0.32s;\n  animation-delay: -0.32s;\n}\n\n.three-bounce .bounce2 {\n  -webkit-animation-delay: -0.16s;\n  animation-delay: -0.16s;\n}\n\n@-webkit-keyframes bouncedelay {\n  0%, 80%, 100% { -webkit-transform: scale(0.0) }\n  40% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bouncedelay {\n  0%, 80%, 100% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 40% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n  }\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 290 */
+/*!*************************************************!*\
+  !*** ./~/react-spinkit/css/wandering-cubes.css ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./wandering-cubes.css */ 291);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./wandering-cubes.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./wandering-cubes.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 291 */
+/*!****************************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/wandering-cubes.css ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".wandering-cubes {\n  width: 27px;\n  height: 27px;\n  position: relative;\n}\n\n.cube1, .cube2 {\n  background-color: #333;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  -webkit-animation: cubemove 1.8s infinite ease-in-out;\n  animation: cubemove 1.8s infinite ease-in-out;\n}\n\n.cube2 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n\n@-webkit-keyframes cubemove {\n  25% { -webkit-transform: translateX(22px) rotate(-90deg) scale(0.5) }\n  50% { -webkit-transform: translateX(22px) translateY(22px) rotate(-180deg) }\n  75% { -webkit-transform: translateX(0px) translateY(22px) rotate(-270deg) scale(0.5) }\n  100% { -webkit-transform: rotate(-360deg) }\n}\n\n@keyframes cubemove {\n  25% { \n    transform: translateX(42px) rotate(-90deg) scale(0.5);\n    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);\n  } 50% {\n    /* Hack to make FF rotate in the right direction */\n    transform: translateX(42px) translateY(42px) rotate(-179deg);\n    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);\n  } 50.1% {\n    transform: translateX(42px) translateY(42px) rotate(-180deg);\n    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);\n  } 75% {\n    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);\n    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);\n  } 100% {\n    transform: rotate(-360deg);\n    -webkit-transform: rotate(-360deg);\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 292 */
+/*!**************************************!*\
+  !*** ./~/react-spinkit/css/wave.css ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./wave.css */ 293);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./wave.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./wave.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 293 */
+/*!*****************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/wave.css ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".wave {\n  width: 50px;\n  height: 27px;\n}\n\n.wave > div {\n  background-color: #333;\n  height: 100%;\n  width: 6px;\n  display: inline-block;\n\n  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;\n  animation: stretchdelay 1.2s infinite ease-in-out;\n}\n\n.wave .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n\n.wave .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n.wave .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n\n.wave .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n\n@-webkit-keyframes stretchdelay {\n  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }\n  20% { -webkit-transform: scaleY(1.0) }\n}\n\n@keyframes stretchdelay {\n  0%, 40%, 100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n  } 20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n  }\n}\n\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 294 */
+/*!*******************************************!*\
+  !*** ./~/react-spinkit/css/wordpress.css ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../css-loader!./wordpress.css */ 295);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../style-loader/addStyles.js */ 4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js!./wordpress.css", function() {
+				var newContent = require("!!./../../css-loader/index.js!./wordpress.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 295 */
+/*!**********************************************************!*\
+  !*** ./~/css-loader!./~/react-spinkit/css/wordpress.css ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../css-loader/lib/css-base.js */ 3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".wordpress {\n  background: #333;\n  width: 27px;\n  height: 27px;\n  display: inline-block;\n  border-radius: 27px;\n  position: relative;\n  -webkit-animation: inner-circle 1s linear infinite;\n  animation: inner-circle 1s linear infinite;\n}\n\n.inner-circle {\n  display: block;\n  background: #fff;\n  width: 8px;\n  height: 8px;\n  position: absolute;\n  border-radius: 8px;\n  top: 5px;\n  left: 5px;\n}\n\n@-webkit-keyframes inner-circle {\n  0% { -webkit-transform: rotate(0); }\n  100% { -webkit-transform: rotate(360deg); }\n}\n\n@keyframes inner-circle {\n  0% { transform: rotate(0); -webkit-transform:rotate(0); }\n  100% { transform: rotate(360deg); -webkit-transform:rotate(360deg); }\n}\n\n", ""]);
+	
+	// exports
 
 
 /***/ }

@@ -32,7 +32,8 @@ export default class SelectBank extends Component {
 			  key: 'test_key',
 			  product: 'connect',
 			  onSuccess: (public_token, metadata) => {
-			    this.getData(metadata.institution.type)
+			    // this.getData(metadata.institution.type)
+					browserHistory.push('/details');
 			  }
 			});
 		sandboxHandler.open();
