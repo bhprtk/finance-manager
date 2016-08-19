@@ -40101,7 +40101,7 @@
 					_react2.default.createElement('hr', null),
 					_react2.default.createElement(LineChart, { data: this.state.datas, options: this.state.scales, width: '600', height: '250' }),
 					_react2.default.createElement('hr', null),
-					_react2.default.createElement(_TableData2.default, null)
+					this.state.transactions ? _react2.default.createElement(_TableData2.default, { transactions: this.state.transactions, account: this.state.account[0] }) : null
 				);
 			}
 		}]);
@@ -40150,10 +40150,88 @@
 		_createClass(TableData, [{
 			key: "render",
 			value: function render() {
+				var _props = this.props;
+				var transactions = _props.transactions;
+				var account = _props.account;
+	
+				var tableData = transactions.map(function (transaction, index) {
+					return _react2.default.createElement(
+						"tr",
+						{ key: index },
+						_react2.default.createElement(
+							"td",
+							null,
+							transaction.date
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							transaction.name
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							"$",
+							transaction.amount
+						),
+						_react2.default.createElement(
+							"td",
+							null,
+							transaction.meta.location.city,
+							" ",
+							transaction.meta.location.state
+						)
+					);
+				});
+	
 				return _react2.default.createElement(
-					"p",
-					{ className: "titleStyle" },
-					"TableData"
+					"div",
+					{ style: styles.container },
+					_react2.default.createElement(
+						"p",
+						{ className: "titleStyle" },
+						"Transactions for ",
+						account.meta.name,
+						" ",
+						account.meta.number
+					),
+					_react2.default.createElement(
+						"table",
+						{ className: "table table-hover" },
+						_react2.default.createElement(
+							"thead",
+							null,
+							_react2.default.createElement(
+								"tr",
+								null,
+								_react2.default.createElement(
+									"th",
+									null,
+									"Date"
+								),
+								_react2.default.createElement(
+									"th",
+									null,
+									"Name"
+								),
+								_react2.default.createElement(
+									"th",
+									null,
+									"Amount"
+								),
+								_react2.default.createElement(
+									"th",
+									null,
+									"Location"
+								)
+							)
+						),
+						_react2.default.createElement(
+							"tbody",
+							null,
+							tableData
+						)
+					)
 				);
 			}
 		}]);
@@ -40162,6 +40240,13 @@
 	}(_react.Component);
 	
 	exports.default = TableData;
+	
+	
+	var styles = {
+		container: {
+			color: '#696969'
+		}
+	};
 
 /***/ },
 /* 259 */

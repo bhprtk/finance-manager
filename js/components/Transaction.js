@@ -66,7 +66,9 @@ export default class Transaction extends Component {
 				<LineChart data={this.state.datas} options={this.state.scales} width="600" height="250"/>
 				<hr/>
 
-				<TableData />
+			<If condition={this.state.transactions}>
+				<TableData transactions={this.state.transactions} account={this.state.account[0]}/>
+			</If>
 			</div>
 		)
 	}
