@@ -21,13 +21,9 @@ class UserStore extends EventEmitter {
 
 	}
 
-	recieveTransactions(accountId) {
-		console.log('accountId', accountId);
-		console.log('_data', _data);
+	receiveTransactions(accountId) {
+
 		return _data.transactions.filter(transaction => {
-			console.log('transaction._account' , typeof transaction._account);
-			console.log('accountId' , typeof accountId);
-			console.log('transaction._account === accountId', (transaction._account === accountId));
 			return (transaction._account === accountId);
 		})
 	}
