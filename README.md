@@ -21,8 +21,8 @@ http://www.brightplan.com/
 </ul>
 
 
-<p>
+<pre>
 	<strong style={color: yellow;}>Note: </strong>
 	This app was made in a night so the Plaid API is still in sandbox mode. When choosing the bank, the best to test the app would be
 	<strong>Wells Fargo</strong>.
-</p>
+</pre>
