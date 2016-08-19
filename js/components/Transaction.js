@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 const LineChart = require('react-chartjs').Line;
 
 import UserStore from '../stores/UserStore';
+import TableData from './TableData';
 
 export default class Transaction extends Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ export default class Transaction extends Component {
         labels: transactions.map(transaction => transaction.date).reverse(),
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: transactions.map(transaction => transaction.amount.toFixed(2)).reverse(),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -55,8 +56,11 @@ export default class Transaction extends Component {
 		const {params} = this.props;
 		console.log('params.accountId', params.accountId);
 		return (
+			<div className="container">
+				<LineChart data={this.state.datas} options={this.state.scales} width="600" height="250"/>
+				<TableData />
 
-			<LineChart data={this.state.datas} options={this.state.scales} width="600" height="250"/>
+			</div>
 		)
 	}
 }
