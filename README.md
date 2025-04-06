@@ -1,25 +1,74 @@
-<h1>Expense Tracker App</h1>
+# 💰 Track My Expense
 
-<p>A <strong>React</strong> app to get all your bank information in one place and analyze your spendings.</p>
+**Track My Expense** is a full-stack personal finance app that helps users view all their bank account data in one place and analyze their spending habits through interactive charts.
 
-<h3>Deployed to Heroku here: </h3>https://track-my-expense.herokuapp.com/
+---
 
-<h3>Technologies Used</h3>
+## 🚀 Features
 
-<ul>
-	<li>React</li>
-	<li>Flux</li>
-	<li>React Router</li>
-	<li>Plaid API</li>
-	<li>Node</li>
-	<li>Express</li>
-	<li>React ChartJS</li>
-	<li>Heroku</li>
-</ul>
+- Securely connect to bank accounts using the **Plaid API**
+- View account balances and transactions
+- Analyze spending trends through dynamic charts
+- Simple, responsive UI built with modern web technologies
 
+---
 
-<p>
-	<strong style={color: yellow;}>Note: </strong>
-	This app was made in a night so the Plaid API is still in sandbox mode. When choosing the bank, the best to test the app would be
-	<strong>Wells Fargo</strong>.
-</p>
+## 🧰 Tech Stack & What It Does
+
+- **React** – Frontend UI framework for building dynamic user interfaces
+- **Flux** – Handles unidirectional state management across components
+- **React Router** – Enables smooth, client-side navigation between app pages
+- **Node.js** – JavaScript runtime powering the backend
+- **Express** – Web framework for creating the backend server and API routes
+- **Plaid API** – Connects securely to user bank accounts and retrieves financial data (currently in sandbox mode)
+- **React Chart.js** – Visualizes user spending with interactive charts
+- **Heroku** – Cloud platform used for deployment
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/bhprtk/track-my-expense.git
+cd track-my-expense
+npm install
+```
+
+You’ll also need to set up a `.env` file with your **Plaid** credentials (sandbox keys).
+
+---
+
+## ⚙️ Usage
+
+To start the development environment:
+
+```bash
+npm start
+```
+
+Then open your browser and visit:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🧪 Notes
+
+- The app uses the **Plaid sandbox environment**, so transactions and accounts are mock data.
+- For testing, select **Wells Fargo** when prompted to choose a financial institution.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👤 Author
+
+Built by [Pratik Bhandari](https://bhprtk.com)
+
+---
